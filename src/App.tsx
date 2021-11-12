@@ -9,7 +9,9 @@ const App = (): JSX.Element => {
   return (
     <div className={`App ${styles.wrapper}`}>
       <BrowserRouter>
-        <Router />
+        <div className={styles.container}>
+          <Router />
+        </div>
       </BrowserRouter>
     </div>
   )

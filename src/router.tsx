@@ -5,11 +5,9 @@ import Home from './pages/Home'
 
 const Router = (): JSX.Element => {
   return (
-    <div className="app__container">
-      <Switch>
-        <Route path="/"><Home /></Route>
-      </Switch>
-    </div>
+    <Switch>
+      <Route path="/" component={Home} />
+    </Switch>
   )
 }
 
