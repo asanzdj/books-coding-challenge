@@ -3,8 +3,10 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import booksReducer from './redux/books'
 
+const rootReducer = combineReducers({ books: booksReducer })
+
 const store = configureStore({
-  reducer: combineReducers({ products: booksReducer }),
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
@@ -12,3 +14,5 @@ const store = configureStore({
 })
 
 export default store
+
+export type RootState = ReturnType<typeof rootReducer>

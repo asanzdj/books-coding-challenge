@@ -18,8 +18,8 @@ const Book = ({ title, author, stars, ...props }: BookProps): JSX.Element => {
         <p className={styles.author}>{author}</p>
       </div>
       <div className={styles.stars}>
-        {[...Array(stars)].map((num) =>
-          <div className={styles.star} key={num} />,
+        {[...Array(stars)].map((o, index) =>
+          <div className={styles.star} key={index} />,
         )}
       </div>
     </Link>
