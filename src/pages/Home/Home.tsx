@@ -24,7 +24,7 @@ const Home = (): JSX.Element => {
           SEARCHER
         </div>
         <div className={styles.actions}>
-          <Button>Add new book</Button>
+          <Button>Add book</Button>
         </div>
       </div>
 
