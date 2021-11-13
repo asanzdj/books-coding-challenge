@@ -13,6 +13,10 @@ module.exports = () => {
       max: 5,
     }),
     title: faker.lorem.words(5),
+    summary: faker.lorem.paragraphs(faker.datatype.number({
+      min: 1,
+      max: 3,
+    })),
   })
 
   for (let i = 0; i < 15; i++) {

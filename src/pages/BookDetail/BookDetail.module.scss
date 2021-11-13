@@ -1,0 +1,50 @@
+.wrapper {
+
+}
+
+.actions {
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: 0;
+  max-width: 10rem;
+
+  & > * {
+    margin-left: 1rem;
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.stars {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+
+  &:first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.author {
+  font-size: .8rem;
+  margin-top: .25rem;
+  opacity: .7;
+}
+
+.summary {
+  font-size: .8rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.2rem;
+  max-width: 90%;
+}

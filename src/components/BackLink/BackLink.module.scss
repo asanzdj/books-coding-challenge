@@ -1,0 +1,19 @@
+@import 'src/styles/_colors';
+
+.wrapper {
+  align-items: baseline;
+  color: $black;
+  display: flex;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .03rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.arrow {
+  display: block;
+  height: .5rem;
+  margin-right: .25rem;
+  width: .5rem;
+}
