@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './BookDetail.module.scss'
-import Button from '../../components/Button/Button'
 import { RootState } from '../../store'
 import { fetchBook } from '../../store/redux/books'
 import Star from '../../components/Star/Star'
@@ -18,14 +17,9 @@ const BookDetail = (): JSX.Element => {
     dispatch(fetchBook({ id }))
   }, [])
 
-
   return (
-    <div className={styles.wrapper}>
+    <div>
       <BackLink path="/">Go back</BackLink>
-      <div className={styles.actions}>
-        <Button>Delete</Button>
-        <Button>Edit</Button>
-      </div>
       <div className={styles.content}>
         <div className={styles.info}>
           <p className={styles.title}>{book?.title}</p>
@@ -38,7 +32,6 @@ const BookDetail = (): JSX.Element => {
         </div>
       </div>
       <p className={styles.summary}>{book?.summary}</p>
-
     </div>
   )
 }
