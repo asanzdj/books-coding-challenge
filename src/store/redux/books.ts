@@ -29,6 +29,16 @@ export const fetchBook = createAsyncThunk(
   },
 )
 
+export const deleteBook = createAsyncThunk(
+  'books/delete',
+  async ({ id }: { id?: string }) => {
+    const response = await fetch('http://localhost:3001/books/' + id, {
+      method: 'DELETE',
+    })
+    return await response.json()
+  },
+)
+
 const initialState = {
   books: [],
   book: null,
@@ -46,9 +56,11 @@ const booksSlice = createSlice({
     builder.addCase(fetchBook.fulfilled, (state, action) => {
       return { ...state, book: action.payload[0] }
     })
+
+    builder.addCase(deleteBook.fulfilled, (state, action) => {
+      return { ...state, books: state.books.filter(book => book.id !== action.meta.arg.id) }
+    })
   },
 })
-
-// export const {} = booksSlice.actions
 
 export default booksSlice.reducer

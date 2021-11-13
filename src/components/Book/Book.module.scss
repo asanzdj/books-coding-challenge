@@ -3,13 +3,17 @@
 .wrapper {
   align-items: center;
   border-bottom: 2px solid $isabelline;
-  color: $black;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   padding: 1rem .5rem 1rem;
-  text-decoration: none;
   width: 100%;
+}
+
+.link {
+  color: $black;
+  flex-grow: 1;
+  text-decoration: none;
 }
 
 .title {
@@ -27,6 +31,38 @@
 }
 
 .stars {
-  display: flex;
   align-items: center;
+  display: flex;
+  margin-bottom: .25rem;
+}
+
+.actions {
+  align-items: center;
+  display: flex;
+}
+
+.edit,
+.delete {
+  cursor: pointer;
+  display: block;
+  height: .8rem;
+  width: .8rem;
+}
+
+.edit {
+  margin-right: 1rem;
+
+  svg {
+    path {
+      fill: $buff;
+    }
+  }
+}
+
+.delete {
+  svg {
+    path {
+      fill: $red-ryb;
+    }
+  }
 }

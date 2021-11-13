@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import styles from './Book.module.scss'
 import Star from '../Star/Star'
+import { ReactComponent as TrashIcon } from '../../assets/icons/trash.svg'
+import { ReactComponent as PencilIcon } from '../../assets/icons/pencil.svg'
+import { deleteBook } from '../../store/redux/books'
 
 type BookProps = {
   author: string,
@@ -12,18 +16,38 @@ type BookProps = {
 }
 
 const Book = ({ title, author, stars, id, ...props }: BookProps): JSX.Element => {
+  const dispatch = useDispatch()
+
+  const handleDelete = () => {
+    return (e: React.MouseEvent) => {
+      e.stopPropagation()
+      dispatch(deleteBook({ id }))
+    }
+  }
+
+
   return (
-    <Link to={`/books/${id}`} className={styles.wrapper} {...props}>
-      <div className={styles.info}>
-        <p className={styles.title}>{title}</p>
-        <p className={styles.author}>{author}</p>
+    <div className={styles.wrapper}>
+      <Link to={`/books/${id}`} className={styles.link} {...props}>
+        <div className={styles.info}>
+          <div className={styles.stars}>
+            {[...Array(stars)].map((o, index) =>
+              <Star key={index} />,
+            )}
+          </div>
+          <p className={styles.title}>{title}</p>
+          <p className={styles.author}>{author}</p>
+        </div>
+      </Link>
+      <div className={styles.actions}>
+        <span className={styles.edit}>
+          <PencilIcon />
+        </span>
+        <span className={styles.delete} onClick={handleDelete()}>
+          <TrashIcon />
+        </span>
       </div>
-      <div className={styles.stars}>
-        {[...Array(stars)].map((o, index) =>
-          <Star key={index} />,
-        )}
-      </div>
-    </Link>
+    </div>
   )
 }
 
