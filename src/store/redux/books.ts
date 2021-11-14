@@ -15,7 +15,7 @@ type State = {
   sorting: {
     direction: 'ASC' | 'DESC',
     category: string,
-  }
+  },
 }
 
 const initialState = {
@@ -53,6 +53,14 @@ export const deleteBook = createAsyncThunk(
   },
 )
 
+export const filterByTerm = createAsyncThunk(
+  'books/filter',
+  async ({ term }: { term?: string }) => {
+    const response = await fetch(`http://localhost:3001/books?title_like=${term}&author_like=${term}`)
+    return await response.json()
+  },
+)
+
 const booksSlice = createSlice({
   name: 'books',
   initialState: initialState,
@@ -77,6 +85,10 @@ const booksSlice = createSlice({
 
     builder.addCase(deleteBook.fulfilled, (state, action) => {
       return { ...state, books: state.books.filter(book => book.id !== action.meta.arg.id) }
+    })
+
+    builder.addCase(filterByTerm.fulfilled, (state, action) => {
+      return { ...state, books: action.payload }
     })
   },
 })

@@ -1,0 +1,49 @@
+@import 'src/styles/_colors';
+
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  border: 0;
+  border-bottom: 1px solid $bombay;
+  color: $dark-liver;
+  flex-grow: 1;
+  height: 1.5rem;
+  padding: .25rem .5rem .25rem 0;
+  position: relative;
+  width: 100%;
+
+  &:focus {
+    border-bottom: 1px solid $usafa-blue;
+    outline: none;
+  }
+}
+
+.icon {
+  bottom: .75rem;
+  display: inline-block;
+  height: 1rem;
+  position: absolute;
+  right: 0;
+  width: 1rem;
+
+  svg path {
+    fill: $bombay;
+  }
+}
+
+.input:focus + .icon {
+  svg path {
+    fill: $usafa-blue;
+  }
+}
+
+.clear-icon {
+  cursor: pointer;
+
+  svg path {
+    fill: $usafa-blue;
+  }
+}

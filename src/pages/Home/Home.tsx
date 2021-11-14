@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './Home.module.scss'
 import Button from '../../components/Button/Button'
 import Book from '../../components/Book/Book'
-import { fetchBooks, setSort } from '../../store/redux/books'
+import { fetchBooks, filterByTerm, setSort } from '../../store/redux/books'
 import { RootState } from '../../store'
 import Sorter from '../../components/Sorter/Sorter'
+import Searcher from '../../components/Searcher/Searcher'
 
 type SortingType = {
   category: string,
@@ -24,6 +25,10 @@ const Home = (): JSX.Element => {
     dispatch(setSort(newSorting))
   }
 
+  const handleSearch = (term: string): void => {
+    dispatch(filterByTerm({ term }))
+  }
+
   useEffect(() => {
     dispatch(fetchBooks())
   }, [])
@@ -33,7 +38,7 @@ const Home = (): JSX.Element => {
       <h1 className={styles.title}>My library</h1>
       <div className={styles['actions-bar']}>
         <div className={styles.searcher}>
-          SEARCHER
+          <Searcher onSearch={handleSearch} />
         </div>
         <div className={styles.actions}>
           <Button onClick={() => history.push('/books/new')}>Add book</Button>

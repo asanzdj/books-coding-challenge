@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
@@ -19,7 +19,7 @@ const Book = ({ title, author, stars, id, ...props }: BookProps): JSX.Element =>
   const dispatch = useDispatch()
 
   const handleDelete = () => {
-    return (e: React.MouseEvent) => {
+    return (e: MouseEvent) => {
       e.stopPropagation()
       dispatch(deleteBook({ id }))
     }
