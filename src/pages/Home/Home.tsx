@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import debounce from 'lodash.debounce'
 
 import styles from './Home.module.scss'
 import Button from '../../components/Button/Button'
@@ -25,8 +26,14 @@ const Home = (): JSX.Element => {
     dispatch(setSort(newSorting))
   }
 
+  const debounceSearch = ({ term }: { term: string }) =>
+    debounce(() => {
+      dispatch(filterByTerm({ term }))
+    }, 500)
+
+
   const handleSearch = (term: string): void => {
-    dispatch(filterByTerm({ term }))
+    debounceSearch({ term })()
   }
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+
 import { sort } from '../../utils/sorting'
 
 type Book = {
@@ -62,7 +63,8 @@ export const deleteBook = createAsyncThunk(
 export const filterByTerm = createAsyncThunk(
   'books/filter',
   async ({ term }: { term?: string }) => {
-    const response = await fetch(`http://localhost:3001/books?title_like=${term}&author_like=${term}`)
+    const path = term ? `/_search?title=${term}` : ''
+    const response = await fetch(`http://localhost:3001/books${path}`)
     return await response.json()
   },
 )

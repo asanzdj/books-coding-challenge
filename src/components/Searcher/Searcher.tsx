@@ -12,7 +12,7 @@ const Searcher = ({ onSearch }: SearcherProps): JSX.Element => {
   const [term, setTerm] = useState<string>('')
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    const searchTerm = e.target.value.trim().toLowerCase()
+    const searchTerm = e.target.value.toLowerCase()
     setTerm(searchTerm)
     onSearch(searchTerm)
   }
