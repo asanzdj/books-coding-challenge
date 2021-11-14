@@ -1,24 +1,35 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { FieldError } from 'react-hook-form'
 
 import styles from './TextField.module.scss'
 
 type TextFieldProps = {
-  label: string,
   error?: FieldError,
+  label: string,
+  name: string,
+  inputType?: 'text' | 'number',
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void,
+  value: string,
 }
 
-const TextField = ({ label, error, ...props }: TextFieldProps): JSX.Element => {
+const defaultProps = {
+  inputType: 'text',
+}
+
+const TextField = ({ label, error, value, onChange, name, inputType }: TextFieldProps): JSX.Element => {
   return (
     <label className={styles.wrapper}>
       <span className={styles.label}>{label}</span>
       <input
         className={styles.input}
-        {...props}
+        type={inputType}
+        {...{ name, onChange, value }}
       />
-      <span className={styles.error}>{error}</span>
+      {error && <span className={styles.error}>{error.message}</span>}
     </label>
   )
 }
+
+TextField.defaultProps = defaultProps
 
 export default TextField

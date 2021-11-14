@@ -9,6 +9,12 @@ type Book = {
   stars: number,
 }
 
+type NewBook = {
+  title: string,
+  author: string,
+  summary: string,
+}
+
 type State = {
   books: Book[]
   book: Book | null,
@@ -61,6 +67,20 @@ export const filterByTerm = createAsyncThunk(
   },
 )
 
+export const createBook = createAsyncThunk(
+  'books/new',
+  async (data: NewBook) => {
+    const response = await fetch('http://localhost:3001/books', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    return await response.json()
+  },
+)
+
 const booksSlice = createSlice({
   name: 'books',
   initialState: initialState,
@@ -89,6 +109,11 @@ const booksSlice = createSlice({
 
     builder.addCase(filterByTerm.fulfilled, (state, action) => {
       return { ...state, books: action.payload }
+    })
+
+    builder.addCase(createBook.fulfilled, (state, action) => {
+      // TODO: Remove stars after fixing input type
+      return { ...state, books: [...state.books, { ...action.payload, stars: 3 }] }
     })
   },
 })

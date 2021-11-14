@@ -1,4 +1,5 @@
 @import 'src/styles/_colors';
+@import 'src/styles/_variables';
 
 .wrapper {
   display: flex;
@@ -13,12 +14,15 @@
 }
 
 .input {
+  font-family: $font-family;
   border: 0;
   border-bottom: 1px solid $bombay;
   box-sizing: border-box;
   font-size: .75rem;
+  min-height: 10rem;
   outline: none;
   padding: .25rem;
+  resize: none;
   width: 100%;
 
   &:focus {
