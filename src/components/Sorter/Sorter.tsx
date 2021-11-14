@@ -27,7 +27,7 @@ const Sorter = ({ category, direction, onSort }: SorterProps): JSX.Element => {
 
   return (
     <div className={styles.wrapper} onClick={handleClick}>
-      <p className={styles.category}>Sort by name</p>
+      <p className={styles.category}>Sort by {category}</p>
       <span className={`${styles.symbol} ${isDesc && styles['symbol--desc']}`}>
         <UpArrowIcon />
       </span>
