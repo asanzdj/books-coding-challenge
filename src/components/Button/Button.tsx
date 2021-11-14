@@ -4,11 +4,12 @@ import styles from './Button.module.scss'
 
 type ButtonProps = {
   children: string | JSX.Element;
+  onClick: () => void
 }
 
-const Button = ({ children, ...props }: ButtonProps): JSX.Element => {
+const Button = ({ children, onClick, ...props }: ButtonProps): JSX.Element => {
   return (
-    <button className={styles.wrapper} {...props}>
+    <button className={styles.wrapper} onClick={onClick} {...props}>
       {children}
     </button>
   )

@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { sort } from '../../utils/sorting'
 
 type Book = {
   title: string,
@@ -11,7 +12,20 @@ type Book = {
 type State = {
   books: Book[]
   book: Book | null,
+  sorting: {
+    direction: 'ASC' | 'DESC',
+    category: string,
+  }
 }
+
+const initialState = {
+  books: [],
+  book: null,
+  sorting: {
+    direction: 'ASC',
+    category: 'title',
+  },
+} as State
 
 export const fetchBooks = createAsyncThunk(
   'books/fetch',
@@ -39,18 +53,22 @@ export const deleteBook = createAsyncThunk(
   },
 )
 
-const initialState = {
-  books: [],
-  book: null,
-} as State
-
 const booksSlice = createSlice({
   name: 'books',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setSort: (state, { payload }) => ({
+      ...state,
+      sorting: payload,
+      books: sort(state.books)(payload.category, payload.direction),
+    }),
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.fulfilled, (state, action) => {
-      return { ...state, books: action.payload }
+      return {
+        ...state,
+        books: sort(action.payload)(state.sorting.category, state.sorting.direction),
+      }
     })
 
     builder.addCase(fetchBook.fulfilled, (state, action) => {
@@ -62,5 +80,9 @@ const booksSlice = createSlice({
     })
   },
 })
+
+export const {
+  setSort,
+} = booksSlice.actions
 
 export default booksSlice.reducer

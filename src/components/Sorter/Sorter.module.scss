@@ -1,0 +1,21 @@
+.wrapper {
+  align-items: baseline;
+  cursor: pointer;
+  display: flex;
+}
+
+.category {
+  font-size: .8rem;
+  margin-right: .25rem;
+}
+
+.symbol {
+  display: block;
+  height: .5rem;
+  width: .5rem;
+}
+
+.symbol--desc {
+  transform: rotate(180deg);
+  transform-origin: 56% 134%;
+}

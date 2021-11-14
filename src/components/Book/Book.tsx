@@ -25,7 +25,6 @@ const Book = ({ title, author, stars, id, ...props }: BookProps): JSX.Element =>
     }
   }
 
-
   return (
     <div className={styles.wrapper}>
       <Link to={`/books/${id}`} className={styles.link} {...props}>
