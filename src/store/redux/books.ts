@@ -84,6 +84,20 @@ export const createBook = createAsyncThunk(
   },
 )
 
+export const editBook = createAsyncThunk(
+  'books/edit',
+  async (data: Book) => {
+    const response = await fetch('http://localhost:3001/books/' + data.id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    return await response.json()
+  },
+)
+
 const booksSlice = createSlice({
   name: 'books',
   initialState: initialState,
@@ -115,8 +129,12 @@ const booksSlice = createSlice({
     })
 
     builder.addCase(createBook.fulfilled, (state, action) => {
-      // TODO: Remove stars after fixing input type
-      return { ...state, books: [...state.books, { ...action.payload, stars: 3 }] }
+      return { ...state, books: [...state.books, action.payload] }
+    })
+
+    builder.addCase(editBook.fulfilled, (state, action) => {
+      const books = state.books.map(book => book.id === action.payload.id ? action.payload : book)
+      return { ...state, books: books }
     })
   },
 })

@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import styles from './Book.module.scss'
@@ -17,6 +17,7 @@ type BookProps = {
 
 const Book = ({ title, author, stars, id, ...props }: BookProps): JSX.Element => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const handleDelete = () => {
     return (e: MouseEvent) => {
@@ -39,7 +40,7 @@ const Book = ({ title, author, stars, id, ...props }: BookProps): JSX.Element =>
         </div>
       </Link>
       <div className={styles.actions}>
-        <span className={styles.edit}>
+        <span className={styles.edit} onClick={() => history.push(`/books/${id}/edit`)}>
           <PencilIcon />
         </span>
         <span className={styles.delete} onClick={handleDelete()}>

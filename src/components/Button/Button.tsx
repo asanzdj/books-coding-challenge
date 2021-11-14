@@ -5,7 +5,7 @@ import styles from './Button.module.scss'
 type ButtonProps = {
   children: string | JSX.Element;
   onClick?: () => void
-  type: 'button' | 'submit'
+  type?: 'button' | 'submit'
 }
 
 const defaultProps = {
