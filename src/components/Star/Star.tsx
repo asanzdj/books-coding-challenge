@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 
 import styles from './Star.module.scss'
 
-const Star = (): JSX.Element => {
+type StarProps = {
+  onClick?: (e: MouseEvent<HTMLInputElement> ) => void
+}
+
+const Star = ({ onClick }: StarProps): JSX.Element => {
   return (
-    <div className={styles.wrapper} />
+    <div className={styles.wrapper} onClick={onClick} />
   )
 }
 

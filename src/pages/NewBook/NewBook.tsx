@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import omit from 'lodash.omit'
 import { useDispatch } from 'react-redux'
@@ -10,6 +10,7 @@ import BackLink from '../../components/BackLink/BackLink'
 import TextArea from '../../components/TextArea/TextArea'
 import Button from '../../components/Button/Button'
 import { createBook } from '../../store/redux/books'
+import Star from '../../components/Star/Star'
 
 type FormData = {
   title: string,
@@ -21,16 +22,18 @@ type FormData = {
 const NewBook = (): JSX.Element => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const [stars, setStars] = useState(1)
+
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues: {
       title: '',
       author: '',
       summary: '',
-      stars: 0,
+      stars: 1,
     },
   })
   const onSubmit = handleSubmit(data => {
-    dispatch(createBook(data))
+    dispatch(createBook({...data, stars }))
     history.push('/')
   })
 
@@ -78,21 +81,16 @@ const NewBook = (): JSX.Element => {
               />}
           />
         </div>
-        {/*TODO: Fix this field: Error --> input type */}
-        {/* <div className={styles.field}>
-          <Controller
-            name="stars"
-            control={control}
-            rules={{ required: 'Is required' }}
-            render={({ field }) =>
-              <TextField
-                label="Stars"
-                error={errors['stars']}
-                inputType="number"
-                {...omit(field, ['ref'])}
-              />}
-          />
-        </div>*/}
+        <div className={styles.field}>
+          <span className={styles.label}>Score</span>
+          <div className={styles.stars}>
+            {[...Array(5)].map((o, index) =>
+              <span key={index} className={(index + 1) <= stars ? styles['selected-star'] : styles.star}>
+                <Star  onClick={() => setStars(index + 1)} />
+              </span>,
+            )}
+          </div>
+        </div>
         <div className={styles.submit}>
           <Button type='submit'>Add</Button>
         </div>

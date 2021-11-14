@@ -14,6 +14,7 @@ type NewBook = {
   title: string,
   author: string,
   summary: string,
+  stars: number,
 }
 
 type State = {
