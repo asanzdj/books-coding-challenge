@@ -26,7 +26,7 @@ type State = {
   },
 }
 
-const initialState = {
+export const initialState = {
   books: [],
   book: null,
   sorting: {
