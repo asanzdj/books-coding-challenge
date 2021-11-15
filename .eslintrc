@@ -1,7 +1,8 @@
 {
   "parser": "@typescript-eslint/parser",
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "cypress"
   ],
   "extends": [
     "eslint:recommended",
@@ -23,5 +24,8 @@
       "always-multiline"
     ],
     "semi": ["error", "never"]
+  },
+  "env": {
+    "cypress/globals": true
   }
 }

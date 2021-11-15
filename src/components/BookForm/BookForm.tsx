@@ -24,10 +24,11 @@ type BookFormProps = {
   },
   onSubmit: (data: FormData) => void,
   formTitle: string,
-  submitLabel: string
+  submitLabel: string,
+  submitDataCy?: string,
 }
 
-const BookForm = ({ defaultValues, onSubmit, formTitle, submitLabel }: BookFormProps): JSX.Element => {
+const BookForm = ({ defaultValues, onSubmit, formTitle, submitLabel, submitDataCy }: BookFormProps): JSX.Element => {
   const [stars, setStars] = useState(1)
 
   const {
@@ -97,14 +98,16 @@ const BookForm = ({ defaultValues, onSubmit, formTitle, submitLabel }: BookFormP
                 className={
                   index + 1 <= stars ? styles['selected-star'] : styles.star
                 }
+                onClick={() => setStars(index + 1)}
+                data-cy="score-star"
               >
-                <Star onClick={() => setStars(index + 1)} />
+                <Star  />
               </span>
             ))}
           </div>
         </div>
         <div className={styles.submit}>
-          <Button type="submit">{submitLabel}</Button>
+          <Button type="submit" data-cy={submitDataCy}>{submitLabel}</Button>
         </div>
       </form>
     </div>

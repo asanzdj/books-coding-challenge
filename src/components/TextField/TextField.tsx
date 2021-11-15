@@ -24,7 +24,7 @@ const TextField = ({ label, error, value, onChange, name }: TextFieldProps): JSX
         className={styles.input}
         {...{ name, onChange, value }}
       />
-      {error && <span className={styles.error}>{error.message}</span>}
+      {error && <span className={styles.error} data-cy="text-field-error">{error.message}</span>}
     </label>
   )
 }

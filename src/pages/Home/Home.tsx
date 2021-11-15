@@ -48,7 +48,10 @@ const Home = (): JSX.Element => {
           <Searcher onSearch={handleSearch} />
         </div>
         <div className={styles.actions}>
-          <Button onClick={() => history.push('/books/new')}>Add book</Button>
+          <Button
+            onClick={() => history.push('/books/new')}
+            data-cy="add-book"
+          >Add book</Button>
         </div>
       </div>
       <div className={styles.list}>

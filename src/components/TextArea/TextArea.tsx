@@ -21,7 +21,7 @@ const TextArea = ({ label, error, value, onChange, name }: TextFieldProps): JSX.
         onChange={onChange}
         value={value}
       />
-      {error && <span className={styles.error}>{error.message}</span>}
+      {error && <span className={styles.error} data-cy="text-area-error">{error.message}</span>}
     </label>
   )
 }
